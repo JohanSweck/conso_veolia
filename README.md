@@ -15,5 +15,7 @@ En cas de soucis, le script remonte une exeption.
 
 
 ## Résultat
+
 [15:05:46] xxx@openHABianPi:/etc/openhab2/scripts/conso_veolia$ python3.7 veolia.py
+
 419 Litres
