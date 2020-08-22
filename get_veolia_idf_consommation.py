@@ -70,9 +70,11 @@ try:
 	from_field.send_keys(yesterday.strftime("%d/%m/%Y"))
 	time.sleep(2)
 	from_field.send_keys(Keys.RETURN)
-	time.sleep(30)
-	kpi_field = browser.find_elements_by_class_name("kpi-value")
-	kpi_value = kpi_field[1].text.split(" - ")
+	for x in range(60):
+		time.sleep(2)
+		kpi_field = browser.find_elements_by_class_name("kpi-value")
+		kpi_value = kpi_field[1].text.split(" - ")
+		if kpi_value[0] >= yesterday.strftime("%d/%m/%Y") : break
 	if kpi_value[0] < yesterday.strftime("%d/%m/%Y") : raise Exception('wrong date') 
 	print(kpi_value[1])
 
