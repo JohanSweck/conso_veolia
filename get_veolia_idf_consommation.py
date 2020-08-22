@@ -47,7 +47,7 @@ try:
 	browser.get(urlHome)
 	WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR , 'input[type="email"]')))
 	nb_form = len(browser.find_elements_by_css_selector('input[type="email"]'))
-	if nb_form != 2 : raise Exception('Number of login form: ', nb_form ) 
+	if nb_form != 2 : raise Exception('wrong login number') 
 	email_field = browser.find_elements_by_css_selector('input[type="email"]')[1]
 	email_field.clear()
 	email_field.send_keys(veolia_login)
@@ -63,7 +63,7 @@ try:
 	browser.get(urlConso)
 	WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.NAME , 'from')))
 	nb_kpi = len(browser.find_elements_by_class_name("kpi-value"))
-	if nb_kpi != 3 : raise Exeption('Number of KPI found: ', nb_kpi)
+	if nb_kpi != 3 : raise Exeption('wrong KPI number')
 	from_field = browser.find_element_by_name("from")
 	from_field.clear()
 	yesterday = datetime.date.today() - datetime.timedelta(days = 1)
@@ -73,7 +73,7 @@ try:
 	time.sleep(30)
 	kpi_field = browser.find_elements_by_class_name("kpi-value")
 	kpi_value = kpi_field[1].text.split(" - ")
-	if kpi_value[0] < yesterday.strftime("%d/%m/%Y") : raise Exception('wrong date: ', kpi_value[0] ) 
+	if kpi_value[0] < yesterday.strftime("%d/%m/%Y") : raise Exception('wrong date') 
 	print(kpi_value[1])
 
 	browser.close()
