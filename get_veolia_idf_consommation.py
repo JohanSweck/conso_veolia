@@ -18,7 +18,7 @@ urlConso = 'https://espace-client.vedif.eau.veolia.fr/s/historique'
 
 #Informations de connexion
 veolia_login = 'XXX@XXXX.XXX'
-veolia_password = 'XXXXXXXx'
+veolia_password = 'XXXXXXXX'
 
 #Emplacement de sauvegarde du fichier à télécharger
 downloadPath = '/etc/openhab2/scripts/conso_veolia/'
@@ -46,9 +46,9 @@ try:
 	#Page de login
 	browser.get(urlHome)
 	WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR , 'input[type="email"]')))
-	nb_form = len(browser.find_elements_by_css_selector('input[type="email"]'))
+	nb_form = len(browser.find_elements_by_css_selector('input[inputmode="email"]'))
 	if nb_form != 2 : raise Exception('wrong login number') 
-	email_field = browser.find_elements_by_css_selector('input[type="email"]')[1]
+	email_field = browser.find_elements_by_css_selector('input[inputmode="email"]')[1]
 	email_field.clear()
 	email_field.send_keys(veolia_login)
 	time.sleep(2)
@@ -62,10 +62,16 @@ try:
 	#Page de consommation
 	browser.get(urlConso)
 	WebDriverWait(browser, 20).until(EC.presence_of_element_located((By.NAME , 'from')))
+	literButton = browser.find_element_by_xpath("//span[contains(.,'Jours')]//parent::button")
+	literButton.send_keys(Keys.RETURN)
+	time.sleep(2)
+	literButton = browser.find_element_by_xpath("//span[contains(.,'Litres')]//parent::button")
+	literButton.send_keys(Keys.RETURN)
+	time.sleep(2)	
 	nb_kpi = len(browser.find_elements_by_class_name("kpi-value"))
 	if nb_kpi != 3 : raise Exeption('wrong KPI number')
 	yesterday = datetime.date.today() - datetime.timedelta(days = 1)	
-	for x in range(10):
+	for x in range(20):
 		from_field = browser.find_element_by_name("from")
 		from_field.clear()
 		from_field.send_keys(yesterday.strftime("%d/%m/%Y"))
