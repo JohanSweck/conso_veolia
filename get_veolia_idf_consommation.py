@@ -69,7 +69,7 @@ try:
 	literButton.send_keys(Keys.RETURN)
 	time.sleep(2)	
 	nb_kpi = len(browser.find_elements_by_class_name("kpi-value"))
-	if nb_kpi != 3 : raise Exeption('wrong KPI number')
+	if nb_kpi != 3 : raise Exception('wrong KPI number')
 	yesterday = datetime.date.today() - datetime.timedelta(days = 1)	
 	for x in range(20):
 		from_field = browser.find_element_by_name("from")
