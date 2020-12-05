@@ -86,7 +86,7 @@ try:
 
 	browser.close()
 	
-except Exception as e: print('exeption :', e)
+except Exception as e: print('exception :', e)
   
 finally:
 	#fermeture de l'affichage virtuel
