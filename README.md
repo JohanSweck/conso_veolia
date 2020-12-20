@@ -26,6 +26,6 @@ veolia_password = 'M-eau2P@ss'
 ## Résultat
 
 ```
-$ python3.7 get_veolia_idf_consommation.py
+$ python3.7 veolia.py
 419 Litres
 ```
